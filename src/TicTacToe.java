@@ -4,6 +4,7 @@ public class TicTacToe {
     private static final int ROWS = 3;
     private static final int COLS = 3;
     private static final String[][] board = new String[ROWS][COLS];
+    private static final String currentPlayer = "X";
 
 //pseudocode
 
@@ -12,9 +13,10 @@ public class TicTacToe {
 
         Scanner in = new Scanner(System.in);
 
+        boolean gameWon = false;
         boolean gameOver = false;
-
         boolean playAgain;
+
         String playMove = "";
         String playString = "";
         String name1 = "Player 1";
@@ -27,7 +29,10 @@ public class TicTacToe {
         int plays = 0;
 
         do {
+
             clearBoard();
+            plays = 0;
+            gameWon = false;
 
             do {
 
@@ -56,19 +61,18 @@ public class TicTacToe {
 
                 if (plays >= 5) {
                     gameOver = true;
+                    gameWon = isWin(currentPlayer);
                     if (isWin(playString)) {
                         System.out.println(playMove + "WINS!");
                         break;
                     } else if (plays >= 7) {
                         if (isTie()) {
                             System.out.println("It's a...TIE!");
-                            break;
-                        }
+                            break;}
                     }
-                   playAgain = SafeInput.getYNConfirm(in, "Play Again? [Y/N]");
                 }
             } while (gameOver = true);
-        }while (playAgain = true);
+        }while (playAgain = SafeInput.getYNConfirm(in, "Play Again? [Y/N]"));
     }
 
     private static void display() {
