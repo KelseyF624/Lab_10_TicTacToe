@@ -54,7 +54,7 @@ public class TicTacToe {
 
                 } while (isValidMove(row, col));
 
-                if (plays >= 4) {
+                if (plays >= 5) {
                     gameOver = true;
                     if (isWin(playString)) {
                         System.out.println(playMove + "WINS!");
