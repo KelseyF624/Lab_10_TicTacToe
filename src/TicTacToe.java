@@ -62,21 +62,66 @@ public class TicTacToe {
     }while(SafeInput.getYNConfirm(in, "Play Again?"));
 }
 
-    private static void clearBoard() {
-    }
     private static void display(){
+
+        String displayBoard = "";
+        for (int row = 0; row < ROWS; row++) {
+            if (col == COLS - 1){
+                displayBoard += board [ROWS][COLS];}
+            else { displayBoard += board [ROWS][COLS] + "|";}
+            if (row != ROWS - 1){
+                displayBoard += "\n---+---+---\n";}
+        }
+        System.out.println(displayBoard);
     }
+
+    private static void clearBoard() {
+
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                board[row][col] = "   ";} }
+    }
+
     private static boolean isValidMove(int row, int col){
+
+        return (board [row][col].equals("   "));
+
     }
+
     private static boolean isWin(String player){
-    }
+
+        if (isColWin(player) || isRowWin(player) || isDiagonalWin(player)) {
+            return true;}
+        else return false;}
+
     private static boolean isColWin(String player){
+
+        for (int col = 0; col < COLS; col++) {
+            if (board[0][col].equals(player) && board[1][col].equals(player) && board[2][col].equals(player)) {
+                return true;}
+        }
+        return false;
     }
-    private static boolean isRowWin(String player){
+
+    private static boolean isRowWin(String player) {
+
+        for (int row = 0; row < ROWS; row++) {
+            if (board[row][0].equals(player) && board[row][1].equals(player) && board[row][2].equals(player)) {
+                return true;}
+        }
+        return false;
     }
+
     private static boolean isDiagonalWin(String player){
+
+
+
     }
+
     private static boolean isTie(){
+
+
+
     }
 
 
