@@ -114,15 +114,28 @@ public class TicTacToe {
 
     private static boolean isDiagonalWin(String player){
 
-
-
-    }
+        if (board [0][2].equals(player) && board[1][1].equals(player) && board[2][0].equals(player) ||
+                (board[0][0].equals(player) && board[1][1].equals(player) && board[2][2].equals(player))) {
+            return true;}
+        else return false; }
 
     private static boolean isTie(){
 
+        int noX = 0;
+        int noO = 0;
+        int numberTies = 0;
 
-
-    }
-
-
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                if (board[row][col].equals("X")) {
+                    noX++;}
+            else if (board[row][col].equals("O")) {
+            noO++; }
+            if (noX >= 1 && noO >= 1) {
+                numberTies++;}
+            }
+        }
+        if (numberTies >= 3) {
+            return true;}
+        else return false;}
 }
