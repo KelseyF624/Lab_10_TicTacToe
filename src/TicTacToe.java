@@ -3,7 +3,7 @@ public class TicTacToe {
 
     private static final int ROWS = 3;
     private static final int COLS = 3;
-    private static String board [][] = new String[ROWS][COLS];
+    private static final String[][] board = new String[ROWS][COLS];
 
 //pseudocode
 
@@ -12,8 +12,6 @@ public class TicTacToe {
 
         Scanner in = new Scanner(System.in);
 
-        boolean playAgain = false;
-
         String playMove = "";
         String playString = "";
         String name1 = "Player 1";
@@ -21,59 +19,63 @@ public class TicTacToe {
         String P1 = "X";
         String P2 = "O";
 
-        int moveCount = 0;
         int row;
         int col;
         int plays = 0;
+
     do {
-        do {
-            clearBoard();
-            display();
-            for (int turns = 0; turns < 9; turns++) {
-                if (plays % 2 == 0) {
-                    playMove = P1;
-                    playString = name1;
-                } else {
-                    playMove = P2;
-                    playString = name2;
-                }
+
+        clearBoard();
+        display();
+
+        for (int turns = 0; turns < 9; turns++) {
+            if (plays % 2 == 0) {
+                playString = P1;
+                playMove = name1;
+            } else {
+                playString = P2;
+                playMove = name2;
             }
+        }
             System.out.println("It's your turn " + playMove);
-        } while (moveCount < ROWS * COLS);
 
         do {
-            display();
-            row = SafeInput.getRangedInt(in, "Enter row [1-3]: ", 1, 3) - 1;
-            col = SafeInput.getRangedInt(in, "Enter row [1-3]: ", 1, 3) - 1;
+
+            row = SafeInput.getRangedInt(in, "Enter row: ", 1, 3) - 1;
+            col = SafeInput.getRangedInt(in, "Enter col: ", 1, 3) - 1;
+
         } while (isValidMove(row, col));
-        moveCount++;
-        display();
+
         board[row][col] = playString;
-        if (moveCount >= 4) {
+        display();
+        plays +=1;
+
+        if (plays >= 4) {
 
             if (isWin(playString)) {
-                System.out.println(playMove + "WINS!");}
-            else if (moveCount >= 7) {
-
+                System.out.println(playMove + "WINS!");
+            break; }
+            else if (plays >= 7) {
                 if (isTie()) {
-                    System.out.println("It's a...TIE!");}
+                    System.out.println("It's a...TIE!");
+                break; }
             }
         }
     }while(SafeInput.getYNConfirm(in, "Play Again?"));
 }
 
-    private static void display(){
+    private static void display() {
 
-        String displayBoard = "";
         for (int row = 0; row < ROWS; row++) {
-            int col = 0;
-            if (col == COLS - 1){
-                displayBoard += board [ROWS][COLS];}
-            else { displayBoard += board [ROWS][COLS] + "|";}
-            if (row != ROWS - 1){
-                displayBoard += "\n---+---+---\n";}
+            for (int col = 0; col < COLS; col++) {
+                System.out.print(board[row][col] + " | ");
+            }
+            System.out.print("\n");
+            for (int k = 0; k < COLS * ROWS * 1.25; k++) {
+                System.out.print("-");
+            }
+            System.out.print("\n");
         }
-        System.out.println(displayBoard);
     }
 
     private static void clearBoard() {
@@ -138,5 +140,6 @@ public class TicTacToe {
         }
         if (numberTies >= 3) {
             return true;}
-        else return false;}
+        return false;
+    }
 }
