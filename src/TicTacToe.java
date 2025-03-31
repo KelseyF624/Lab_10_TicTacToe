@@ -66,6 +66,7 @@ public class TicTacToe {
 
         String displayBoard = "";
         for (int row = 0; row < ROWS; row++) {
+            int col = 0;
             if (col == COLS - 1){
                 displayBoard += board [ROWS][COLS];}
             else { displayBoard += board [ROWS][COLS] + "|";}
