@@ -12,6 +12,9 @@ public class TicTacToe {
 
         Scanner in = new Scanner(System.in);
 
+        boolean gameOver = false;
+
+        boolean playAgain;
         String playMove = "";
         String playString = "";
         String name1 = "Player 1";
@@ -23,57 +26,59 @@ public class TicTacToe {
         int col;
         int plays = 0;
 
-    do {
-
-        clearBoard();
-        display();
-
-        for (int turns = 0; turns < 9; turns++) {
-            if (plays % 2 == 0) {
-                playString = P1;
-                playMove = name1;
-            } else {
-                playString = P2;
-                playMove = name2;
-            }
-        }
-            System.out.println("It's your turn " + playMove);
-
         do {
+            clearBoard();
 
-            row = SafeInput.getRangedInt(in, "Enter row: ", 1, 3) - 1;
-            col = SafeInput.getRangedInt(in, "Enter col: ", 1, 3) - 1;
+            do {
 
-        } while (isValidMove(row, col));
+                display();
 
-        board[row][col] = playString;
-        display();
-        plays +=1;
+                for (int turns = 0; turns < 9; turns++) {
+                    if (plays % 2 == 0) {
+                        playString = P1;
+                        playMove = name1;
+                    } else {
+                        playString = P2;
+                        playMove = name2;
+                    }
+                }
+                System.out.println("It's your turn " + playMove);
 
-        if (plays >= 4) {
+                do {
 
-            if (isWin(playString)) {
-                System.out.println(playMove + "WINS!");
-            break; }
-            else if (plays >= 7) {
-                if (isTie()) {
-                    System.out.println("It's a...TIE!");
-                break; }
-            }
-        }
-    }while(SafeInput.getYNConfirm(in, "Play Again?"));
-}
+                    row = SafeInput.getRangedInt(in, "Enter row: ", 1, 3) - 1;
+                    col = SafeInput.getRangedInt(in, "Enter col: ", 1, 3) - 1;
+                    plays += 1;
+                    board[row][col] = playString;
+                    display();
+
+                } while (isValidMove(row, col));
+
+                if (plays >= 4) {
+                    gameOver = true;
+                    if (isWin(playString)) {
+                        System.out.println(playMove + "WINS!");
+                        break;
+                    } else if (plays >= 7) {
+                        if (isTie()) {
+                            System.out.println("It's a...TIE!");
+                            break;
+                        }
+                    }
+                   playAgain = SafeInput.getYNConfirm(in, "Play Again? [Y/N]");
+                }
+            } while (gameOver = true);
+        }while (playAgain = true);
+    }
 
     private static void display() {
 
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
-                System.out.print(board[row][col] + " | ");
-            }
+                System.out.print(board[row][col] + " | ");}
             System.out.print("\n");
             for (int k = 0; k < COLS * ROWS * 1.25; k++) {
-                System.out.print("-");
-            }
+                System.out.print("-");}
             System.out.print("\n");
         }
     }
