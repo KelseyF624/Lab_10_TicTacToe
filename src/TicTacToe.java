@@ -6,7 +6,43 @@ public class TicTacToe {
     private static final String[][] board = new String[ROWS][COLS];
     private static final String currentPlayer = "X";
 
-//pseudocode
+//pseudocode :
+
+//  class TicTacToe
+//      main() {
+//      String currentPlayer = "X"
+//      clearBoard ()
+//          for (int turns = 0; turns < 9; turns ++) {
+//          if (turns = 1 || 3 || 5 || 7 || 9){
+//              currentPlayer = "X"
+//          else {
+//              currentPlayer = "O" }
+//      do {
+//          row = SafeInput.getRangedInt (in, "Enter row: ", 3, 1) - 1;
+//          col = SafeInput.getRangedInt (in, "Enter col: ", 3, 1) - 1;
+//      } while (isValidMove(row, col));
+//          board [row][col] = currentPlayer;
+//          plays += 1
+//      if (plays > 5){
+//          if (isWin){
+//              output "currentPlayer" + "WINS!"}
+//      else if (plays > 7){
+//          if (isTie){
+//              output "It's a...TIE!"}
+//      } } }
+//  return
+//endClass
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
     public static void main(String[] args) {
